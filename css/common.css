@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+  --transition: 0.3s ease-in-out;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -50,40 +54,100 @@ table {
 button {
   font: inherit;
   cursor: pointer;
+  outline: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
-input {
+input, input::placeholder {
   font: inherit;
+  color: currentColor;
+}
+a {
+  color: currentColor;
+  text-decoration: none;
 }
 
 body {
   margin: 16px;
-  font-family: -apple-system, 'Montserrat', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  background-color: #ffffff;
   color: #212121;
   line-height: 1.5;
+  letter-spacing: 0.03em;
   transition: all 0.3s ease-in-out;
 }
 
-.back-button {
-  margin-bottom: 16px;
+h1, h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3333;
+  letter-spacing: 0.04em;
 }
 
-#categories {
+input {
+  height: 40px;
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #808080;
+}
+
+.back-button {
+  margin-bottom: 1rem;
+}
+
+.categories {
+  margin-top: 24px;
+  max-width: 392px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
   .item {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: #F6F6FE;
+    color: #2E2F42;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
     ul {
-      margin-left: 40px;
-      list-style: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      li {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid #808080;
+      }
     }
   }
 }
 
 .gallery-grid {
+  margin: 2rem 0 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-gap: 16px;
+  grid-gap: 1rem;
+
+  @media screen and (min-width: 1024px) {
+    max-width: calc(1128px + (156px * 2));
+    margin: 6.25rem auto 0;
+    padding: 0 9.75rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 3rem 1rem;
+  }
 
   .gallery-image {
     display: block;
@@ -99,9 +163,119 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 1rem;
 }
 
-a {
-  color: currentColor;
+.username-block {
+  input {
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #808080;
+  }
+}
+
+.login-form {
+  margin-top: 1.5rem;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input {
+      height: 40px;
+      padding: 0 1rem;
+      border-radius: 0.25rem;
+      border: 1px solid #808080;
+      transition: background-color var(--transition);
+
+      &:active {
+        border-color: #808080;
+      }
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        outline: none;
+        border-color: #000000;
+      }
+    }
+  }
+
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+}
+
+button {
+  width: fit-content;
+  height: 40px;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  transition: background-color var(--transition);
+
+  &.blue {
+    background-color: #4E75FF;
+
+    &:hover {
+      background-color: #6C8CFF;
+    }
+  }
+
+  &.red {
+    background-color: #FF4E4E;
+
+    &:hover {
+      background-color: #FF7070;
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.controls, .boxes {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background: #F6F6FE;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+
+  input {
+    width: 150px;
+    text-align: center;
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.boxes {
+  margin-top: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px;
+
+  &.hidden {
+    display: none;
+  }
 }

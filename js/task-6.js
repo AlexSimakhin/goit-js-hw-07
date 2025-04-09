@@ -13,6 +13,8 @@ const getRandomHexColor = () => {
 const createBoxes = (amount) => {
   destroyBoxes();
 
+  boxes.classList.remove('hidden');
+
   const elements = [];
   let size = 30;
 
@@ -21,7 +23,6 @@ const createBoxes = (amount) => {
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    box.style.margin = '5px';
     elements.push(box);
     size += 10;
   }
@@ -31,14 +32,26 @@ const createBoxes = (amount) => {
 
 const destroyBoxes = () => {
   boxes.innerHTML = '';
+  boxes.classList.add('hidden');
+  input.value = 1;
+  createBtn.disabled = false;
 }
 
 createBtn.addEventListener('click', () => {
-  const amount = Number(input.value);
+  let amount = Number(input.value);
   if (amount < 1 || amount > 100) return;
 
   createBoxes(amount);
-  input.value = '';
 });
+
+input.addEventListener('input', () => {
+  const amount = Number(input.value);
+
+  if (amount < 1 || amount > 100) {
+    createBtn.disabled = true;
+  } else {
+    createBtn.disabled = false;
+  }
+})
 
 destroyBtn.addEventListener('click', destroyBoxes);
